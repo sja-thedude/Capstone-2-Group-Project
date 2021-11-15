@@ -116,7 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\nfetch('www.themealdb.com/api/json/v1/1/search.php?f=a')\n  .then((response) => response.json())\n  .then((json) => console.log(json));\n\n//# sourceURL=webpack://Capstone_Project/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\nconst baseurl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata';\nconst apiurl = 'https://isro.vercel.app/api/spacecrafts';\n\nasync function getData() {\n  const response = await fetch(baseurl);\n  const result = await response.json();\n  const meal = await result;\n  return meal;\n}\n\ngetData();\n\n//# sourceURL=webpack://Capstone_Project/./src/index.js?");
 
 /***/ })
 

@@ -1,7 +1,13 @@
 import './style.css';
 
-const baseurl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/';
+const baseurl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata';
 const apiurl = 'https://isro.vercel.app/api/spacecrafts';
 
-console.log(baseurl);
-console.log(apiurl);
+async function getData() {
+  const response = await fetch(baseurl);
+  const result = await response.json();
+  const meal = await result;
+  return meal;
+}
+
+getData();
