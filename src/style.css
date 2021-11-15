@@ -13,3 +13,11 @@ header {
 .item {
   margin-right: 30px;
 }
+
+footer {
+  justify-content: center;
+}
+
+.logo {
+  width: 45px;
+}
