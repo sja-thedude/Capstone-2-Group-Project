@@ -1,5 +1,4 @@
 import './style.css';
-import './comment.css';
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const appId = 'AZT0GFy9XFpC4qapJXTL';

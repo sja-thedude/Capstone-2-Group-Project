@@ -25,3 +25,17 @@ footer h4 {
 .logo {
   width: 45px;
 }
+
+.con {
+  padding: 20px;
+}
+
+.popup {
+  background-color: rgba(104, 107, 150, 0.774);
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 60vw;
+  z-index: 100;
+  border-radius: 40px;
+}
