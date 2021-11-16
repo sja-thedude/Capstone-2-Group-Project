@@ -127,7 +127,7 @@ const header = document.querySelector('header');
 const main = document.querySelector('.row');
 const footer = document.querySelector('footer');
 const popupComment = document.querySelector('#popup-comment');
-const commentBtn = document.querySelectorAll('#btn-comment');
+const commentBtn = document.querySelectorAll('.btn-comment');
 
 commentBtn.forEach((item) => {
   item.addEventListener('click', () => {
