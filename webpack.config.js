@@ -1,7 +1,10 @@
 const path = require('path');
+/* eslint-disable */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+/* eslint-enable */
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   devServer: {
     static: './dist',
@@ -12,7 +15,7 @@ module.exports = {
     }),
   ],
   output: {
-    filename: 'bundle.js',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
@@ -28,5 +31,4 @@ module.exports = {
       },
     ],
   },
-  mode: 'development',
 };
