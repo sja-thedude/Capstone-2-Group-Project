@@ -6,7 +6,7 @@ const appId = 'AZT0GFy9XFpC4qapJXTL';
 
 const commentCounter = () => {
   const commentsArr = document.querySelectorAll('.comment-item');
-  const commentsHeader = document.querySelector('#comments-header');
+  const commentsHeader = document.querySelector('#comments-head');
   if (commentsArr) {
     commentsHeader.textContent = `Comments (${commentsArr.length}) by previous visitors`;
   } else {
@@ -14,7 +14,7 @@ const commentCounter = () => {
   }
 };
 
-const loadComments = (itemId) => {
+const commentsLoad = (itemId) => {
   fetch(`${url}${appId}/comments?item_id=${itemId}`)
     .then((response) => response.json())
     .then((json) => {
@@ -33,7 +33,7 @@ const loadComments = (itemId) => {
     });
 };
 
-const uploadComment = (obj) => {
+const commentUpload = (obj) => {
   fetch(`${url}${appId}/comments`, {
     method: 'POST',
     body: JSON.stringify(obj),
@@ -92,7 +92,7 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 </div>
                 `;
       popupNode.innerHTML = popupHtml;
-      loadComments(meal.idMeal);
+      commentsLoad(meal.idMeal);
 
       const commentForm = document.querySelector('#comment-form');
       commentForm.addEventListener('submit', (e) => {
@@ -102,10 +102,10 @@ const loadPopupCommentPage = (itemId, popupNode) => {
           username: commentForm.name.value,
           comment: commentForm.comment.value,
         };
-        uploadComment(commentObj);
+        commentUpload(commentObj);
         commentForm.name.value = '';
         commentForm.comment.value = '';
-        setTimeout(() => { loadComments(meal.idMeal); }, 500);
+        setTimeout(() => { commentsLoad(meal.idMeal); }, 500);
       });
 
       const header = document.querySelector('header');
