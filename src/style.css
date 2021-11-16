@@ -18,6 +18,10 @@ footer {
   justify-content: center;
 }
 
+footer h4 {
+  color: black;
+}
+
 .logo {
   width: 45px;
 }
