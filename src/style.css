@@ -14,6 +14,65 @@ header {
   margin-right: 30px;
 }
 
+header {
+  background-color: rgb(238, 196, 145);
+  display: flex;
+  justify-content: left;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 100px;
+}
+
+
+.logo {
+  width: 45px;
+}
+
+.total-items {
+  font-size: 20px;
+}
+
+#items {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 50% 50%;
+  justify-content: center;
+  margin: auto;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-dishes {
+  display: flex;
+  align-items: baseline;
+}
+
+.item-like {
+  display: flex;
+  flex-direction: column;
+}
+
+.meal-img {
+  width: 200px;
+}
+
+.heart {
+  width: 30px;
+}
+
+.btn {
+  width: 40%;
+  padding: 10px;
+}
+
+
 footer {
   justify-content: center;
 }
