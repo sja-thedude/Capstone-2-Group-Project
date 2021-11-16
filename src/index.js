@@ -3,17 +3,16 @@ import './comment.css';
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const appId = 'AZT0GFy9XFpC4qapJXTL';
-const baseurl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata';
 
 const commentCounter = () => {
-    const commentsArr = document.querySelectorAll('.comment-item');
-    const commentsHeader = document.querySelector('#comments-header');
-    if (commentsArr) {
-      commentsHeader.textContent = `Comments (${commentsArr.length}) by previous visitors`;
-    } else {
-      commentsHeader.textContent = 'Comments (0) by previous visitors';
-    }
-  };
+  const commentsArr = document.querySelectorAll('.comment-item');
+  const commentsHeader = document.querySelector('#comments-header');
+  if (commentsArr) {
+    commentsHeader.textContent = `Comments (${commentsArr.length}) by previous visitors`;
+  } else {
+    commentsHeader.textContent = 'Comments (0) by previous visitors';
+  }
+};
 
 const loadComments = (itemId) => {
   fetch(`${url}${appId}/comments?item_id=${itemId}`)
@@ -29,19 +28,19 @@ const loadComments = (itemId) => {
         commentsDiv.innerHTML = commentsHtml;
         commentCounter();
         return 0;
-        }
-        return 0;
+      }
+      return 0;
     });
 };
 
 const uploadComment = (obj) => {
-    fetch(`${url}${appId}/comments`, {
+  fetch(`${url}${appId}/comments`, {
     method: 'POST',
     body: JSON.stringify(obj),
     headers: {
-        'Content-type': 'application/json; charset=UTF-8',
+      'Content-type': 'application/json; charset=UTF-8',
     },
-    })
+  })
     .then((response) => response.json())
     .then(() => {
 
@@ -49,11 +48,11 @@ const uploadComment = (obj) => {
 };
 
 const loadPopupCommentPage = (itemId, popupNode) => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${itemId}`)
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${itemId}`)
     .then((response) => response.json())
     .then((json) => {
-        const meal = json.meals[0];
-        const popupHtml = `
+      const meal = json.meals[0];
+      const popupHtml = `
             <div class="con">
             <i class="fas fa-times fa-2x" id="back-menu"></i>
                 <div id="img-comment" class="img-comment">
@@ -92,36 +91,36 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 </div>
                 </div>
                 `;
-        popupNode.innerHTML = popupHtml;
-        loadComments(meal.idMeal);
+      popupNode.innerHTML = popupHtml;
+      loadComments(meal.idMeal);
 
-        const commentForm = document.querySelector('#comment-form');
-        commentForm.addEventListener('submit', (e) => {
+      const commentForm = document.querySelector('#comment-form');
+      commentForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const commentObj = {
-            item_id: meal.idMeal,
-            username: commentForm.name.value,
-            comment: commentForm.comment.value,
+          item_id: meal.idMeal,
+          username: commentForm.name.value,
+          comment: commentForm.comment.value,
         };
         uploadComment(commentObj);
         commentForm.name.value = '';
         commentForm.comment.value = '';
         setTimeout(() => { loadComments(meal.idMeal); }, 500);
-        });
+      });
 
-        const header = document.querySelector('header');
-        const main = document.querySelector('.row');
-        const footer = document.querySelector('footer');
-        const popupComment = document.querySelector('#popup-comment');
+      const header = document.querySelector('header');
+      const main = document.querySelector('.row');
+      const footer = document.querySelector('footer');
+      const popupComment = document.querySelector('#popup-comment');
 
-        const goBack = document.querySelector('#back-menu');
-        goBack.addEventListener('click', () => {
+      const goBack = document.querySelector('#back-menu');
+      goBack.addEventListener('click', () => {
         popupNode.innerHTML = '';
         header.style.filter = 'none';
         main.style.filter = 'none';
         footer.style.filter = 'none';
         popupComment.style.display = 'none';
-        });
+      });
     });
 };
 
@@ -132,7 +131,7 @@ const popupComment = document.querySelector('#popup-comment');
 const commentBtn = document.querySelectorAll('.btn-comment');
 
 commentBtn.forEach((item) => {
-    item.addEventListener('click', () => {
+  item.addEventListener('click', () => {
     header.style.filter = 'blur(4px)';
     main.style.filter = 'blur(4px)';
     footer.style.filter = 'blur(4px)';
@@ -141,5 +140,5 @@ commentBtn.forEach((item) => {
     const itemId = item.parentNode.parentNode.querySelector('img').id;
 
     loadPopupCommentPage(itemId, popupComment);
-    });
+  });
 });
