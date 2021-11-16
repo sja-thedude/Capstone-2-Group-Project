@@ -5,16 +5,26 @@ const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/
 const appId = 'AZT0GFy9XFpC4qapJXTL';
 const baseurl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata';
 
+const commentCounter = () => {
+    const commentsArr = document.querySelectorAll('.comment-item');
+    const commentsHeader = document.querySelector('#comments-header');
+    if (commentsArr) {
+      commentsHeader.textContent = `Comments (${commentsArr.length}) by previous visitors`;
+    } else {
+      commentsHeader.textContent = 'Comments (0) by previous visitors';
+    }
+  };
+
 const loadComments = (itemId) => {
-    fetch(`${url}${appId}/comments?item_id=${itemId}`)
+  fetch(`${url}${appId}/comments?item_id=${itemId}`)
     .then((response) => response.json())
     .then((json) => {
-        if (json) {
+      if (json) {
         const itemArr = json;
         const commentsDiv = document.querySelector('#comments');
         let commentsHtml = '';
         itemArr.forEach((item) => {
-            commentsHtml += `<p class="comment-item">${item.creation_date} by ${item.username} : ${item.comment}`;
+          commentsHtml += `<p class="comment-item">${item.creation_date} by ${item.username} : ${item.comment}`;
         });
         commentsDiv.innerHTML = commentsHtml;
         commentCounter();
@@ -43,7 +53,6 @@ const loadPopupCommentPage = (itemId, popupNode) => {
     .then((response) => response.json())
     .then((json) => {
         const meal = json.meals[0];
-        console.log(meal);
         const popupHtml = `
             <div class="con">
             <i class="fas fa-times fa-2x" id="back-menu"></i>
