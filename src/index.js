@@ -1,36 +1,8 @@
 import './style.css';
+import './comment.css';
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const appId = 'AZT0GFy9XFpC4qapJXTL';
-
-// Home Page
-const getFood = async () => {
-  const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
-  response.json().then((json) => {
-    const itemArr = json.meals;
-    itemArr.forEach((item) => {
-      const container = document.querySelector('#items');
-      const card = document.createElement('div');
-      card.innerHTML = `<div class="card">
-<img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}img">
-<div class="item-dishes">
-<p class="dishes-name">${item.strMeal}</p><div class="item-like">
-<a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div id="likes-span">likes</div>
-</div>
-</div>
-<button class="btn btn-comment">Comment</button>
-<button class="btn btn-reserve">Reservations</button>
-</div>`;
-      container.appendChild(card);
-    });
-    const totalItems = document.querySelector('.total-items');
-    const totalNum = document.createElement('p');
-    totalNum.textContent = `${itemArr.length} dishes`;
-    totalItems.appendChild(totalNum);
-  });
-};
-
-getFood();
 
 // Comments popup
 const commentCounter = () => {
@@ -90,7 +62,7 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 </div>
                 <div id="info-item-comment" class="item-info">
                 <div class="ingredient">
-                <h5>Ingredient <i class="fas fa-arrow-down"></i></h5>
+                <h5>Ingredients</h5>
                 <ul>
                 <li>${meal.strIngredient1}</li>
                 <li>${meal.strIngredient2}</li>
@@ -103,7 +75,9 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 <h5>Instruction <i class="fas fa-note"></i></h5>
                     <p> ${meal.strInstructions}</p>
                     </div>
+                <div class="source">    
                 <a href=${meal.strSource} target="_blank">See more about this meal <i class="fas fa-arrow-right"></i></a>
+                </div>
                 </div>
                 <h4 id="comments-head">Comments By previous Visitors</h4>
                 <div id="comments" class="comments"></div>
@@ -115,7 +89,9 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 <div class="form-group">
                 <textarea class="form-control" id="your-comments" name="comment" placeholder="Your comment" required></textarea>
                 </div>
+                <div class="button">
                 <button type="submit" class="btn-submit">Comment</button>
+                </div>
                 </form>
                 </div>
                 </div>
@@ -153,21 +129,50 @@ const loadPopupCommentPage = (itemId, popupNode) => {
     });
 };
 
-const header = document.querySelector('header');
-const main = document.querySelector('.row');
-const footer = document.querySelector('footer');
-const popupComment = document.querySelector('#popup-comment');
-const commentBtn = document.querySelectorAll('.btn-comment');
+// Home Page
+const getFood = async () => {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
+  response.json().then((json) => {
+    const itemArr = json.meals;
+    itemArr.forEach((item) => {
+      const container = document.querySelector('#items');
+      const card = document.createElement('div');
+      card.innerHTML = `<div class="card">
+<img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}">
+<div class="item-dishes">
+<p class="dishes-name">${item.strMeal}</p><div class="item-like">
+<a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div id="likes-span">likes</div>
+</div>
+</div>
+<button class="btn btn-comment">Comment</button>
+<button class="btn btn-reserve">Reservations</button>
+</div>`;
+      container.appendChild(card);
+    });
+    const totalItems = document.querySelector('.total-items');
+    const totalNum = document.createElement('p');
+    totalNum.textContent = `${itemArr.length} dishes`;
+    totalItems.appendChild(totalNum);
 
-commentBtn.forEach((item) => {
-  item.addEventListener('click', () => {
-    header.style.filter = 'blur(4px)';
-    main.style.filter = 'blur(4px)';
-    footer.style.filter = 'blur(4px)';
-    popupComment.style.display = 'block';
+    const header = document.querySelector('header');
+    const main = document.querySelector('.row');
+    const footer = document.querySelector('footer');
+    const popupComment = document.querySelector('#popup-comment');
+    const commentBtn = document.querySelectorAll('.btn-comment');
 
-    const itemId = item.parentNode.parentNode.querySelector('img').id;
+    commentBtn.forEach((item) => {
+      item.addEventListener('click', () => {
+        header.style.filter = 'blur(4px)';
+        main.style.filter = 'blur(4px)';
+        footer.style.filter = 'blur(4px)';
+        popupComment.style.display = 'block';
 
-    loadPopupCommentPage(itemId, popupComment);
+        const itemId = item.parentNode.parentNode.querySelector('img').id;
+
+        loadPopupCommentPage(itemId, popupComment);
+      });
+    });
   });
-});
+};
+
+getFood();
