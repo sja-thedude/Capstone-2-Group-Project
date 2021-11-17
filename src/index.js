@@ -5,8 +5,8 @@ const appId = 'AZT0GFy9XFpC4qapJXTL';
 
 // Home Page
 const getFood = async () => {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
-    response.json().then((json) => {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
+    response.json().then((json) => {
     const itemArr = json.meals;
     itemArr.forEach((item) => {
       const container = document.querySelector('#items');
@@ -19,7 +19,7 @@ const getFood = async () => {
       <p class="dishes-name">${item.strMeal}</p>
       <div class="item-like">
       <a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a>                  
-      <span id="likes-span">likes</span>
+      <div id="likes-span">likes</div>
       </div>
       </div>
       <button class="btn btn-comment">Comment</button>
@@ -33,7 +33,6 @@ const getFood = async () => {
       const totalNum = document.createElement('p');
       totalNum.textContent = `${itemArr.length} dishes`;
       totalItems.appendChild(totalNum);
-
   })
 };
 

@@ -4,20 +4,8 @@ header {
   justify-content: left;
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 100px;
-}
-
 .item {
   margin-right: 30px;
-}
-
-header {
-  background-color: rgb(238, 196, 145);
-  display: flex;
-  justify-content: left;
 }
 
 .nav {
@@ -71,7 +59,6 @@ header {
   width: 40%;
   padding: 10px;
 }
-
 
 footer {
   justify-content: center;
