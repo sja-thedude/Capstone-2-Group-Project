@@ -206,11 +206,10 @@ const getFood = async () => {
   Displaylikes();
 
   const like = () => {
-    const likeBtn = document.getElementsByClassName('.heart');
+    const likeBtn = document.querySelectorAll('heart');
     const arrlikeBtn = Array.from(likeBtn);
     arrlikeBtn.forEach((element, i) => {
       element.addEventListener('click', () => {
-        preventDefault();
         likeapi(i);
       });
     });

@@ -68,8 +68,8 @@ header {
 
 .item-dishes {
   display: grid;
-  grid-template-columns: 70% 30%;
-  column-gap: 15px;
+  grid-template-columns: 80% 20%;
+  column-gap: 5px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -78,6 +78,7 @@ header {
   display: flex;
   flex-direction: column;
   font-size: 12px;
+  width: 50px;
 }
 
 .meal-img {
