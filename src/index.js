@@ -5,35 +5,29 @@ const appId = 'AZT0GFy9XFpC4qapJXTL';
 
 // Home Page
 const getFood = async () => {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
-    response.json().then((json) => {
-    const itemArr = json.meals;
-    itemArr.forEach((item) => {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
+  response.json().then((json) => {
+    const itemArr = json.meals;
+    itemArr.forEach((item) => {
       const container = document.querySelector('#items');
       const card = document.createElement('div');
-      card.innerHTML =
-    `
-      <div class="card">
-      <img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}img">
-      <div class="item-dishes">
-      <p class="dishes-name">${item.strMeal}</p>
-      <div class="item-like">
-      <a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a>                  
-      <div id="likes-span">likes</div>
-      </div>
-      </div>
-      <button class="btn btn-comment">Comment</button>
-      <button class="btn btn-reserve">Reservations</button>
-      </div>`;
-
+      card.innerHTML = `<div class="card">
+<img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}img">
+<div class="item-dishes">
+<p class="dishes-name">${item.strMeal}</p><div class="item-like">
+<a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div id="likes-span">likes</div>
+</div>
+</div>
+<button class="btn btn-comment">Comment</button>
+<button class="btn btn-reserve">Reservations</button>
+</div>`;
       container.appendChild(card);
-      
-    })
-      const totalItems = document.querySelector('.total-items');
-      const totalNum = document.createElement('p');
-      totalNum.textContent = `${itemArr.length} dishes`;
-      totalItems.appendChild(totalNum);
-  })
+    });
+    const totalItems = document.querySelector('.total-items');
+    const totalNum = document.createElement('p');
+    totalNum.textContent = `${itemArr.length} dishes`;
+    totalItems.appendChild(totalNum);
+  });
 };
 
 getFood();
