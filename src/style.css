@@ -8,14 +8,21 @@ header {
   margin-right: 30px;
 }
 
+section h1 {
+  text-align: center;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
-  padding-left: 100px;
+  margin: 30px;
+  padding-left: 200px;
+  color: black;
 }
 
 .logo {
-  width: 45px;
+  width: 15%;
+  padding-left: 10px;
 }
 
 .total-items {
@@ -68,9 +75,9 @@ footer h4 {
 }
 
 .btn-comment {
-  background-color: white;
+  background-color: rgb(169, 173, 241);
   color: #31287e;
-  border: 2px solid rgb(109, 90, 216);
+  border: 3px solid rgb(109, 90, 216);
   border-radius: 20%;
 }
 
@@ -78,4 +85,8 @@ footer h4 {
   background-color: #282e7e;
   color: white;
   border: none;
+}
+
+#popup-comment {
+  display: none;
 }

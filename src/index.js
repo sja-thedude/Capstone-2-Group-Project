@@ -1,4 +1,5 @@
 import './style.css';
+import './comment.css';
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const appId = 'AZT0GFy9XFpC4qapJXTL';
@@ -61,7 +62,7 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 </div>
                 <div id="info-item-comment" class="item-info">
                 <div class="ingredient">
-                <h5>Ingredient <i class="fas fa-arrow-down"></i></h5>
+                <h5>Ingredients</h5>
                 <ul>
                 <li>${meal.strIngredient1}</li>
                 <li>${meal.strIngredient2}</li>
@@ -74,7 +75,9 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 <h5>Instruction <i class="fas fa-note"></i></h5>
                     <p> ${meal.strInstructions}</p>
                     </div>
+                <div class="source">    
                 <a href=${meal.strSource} target="_blank">See more about this meal <i class="fas fa-arrow-right"></i></a>
+                </div>
                 </div>
                 <h4 id="comments-head">Comments By previous Visitors</h4>
                 <div id="comments" class="comments"></div>
@@ -86,7 +89,9 @@ const loadPopupCommentPage = (itemId, popupNode) => {
                 <div class="form-group">
                 <textarea class="form-control" id="your-comments" name="comment" placeholder="Your comment" required></textarea>
                 </div>
+                <div class="button">
                 <button type="submit" class="btn-submit">Comment</button>
+                </div>
                 </form>
                 </div>
                 </div>
@@ -133,7 +138,7 @@ const getFood = async () => {
       const container = document.querySelector('#items');
       const card = document.createElement('div');
       card.innerHTML = `<div class="card">
-<img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}img">
+<img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}">
 <div class="item-dishes">
 <p class="dishes-name">${item.strMeal}</p><div class="item-like">
 <a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div id="likes-span">likes</div>
