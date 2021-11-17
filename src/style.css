@@ -67,16 +67,15 @@ footer h4 {
   color: black;
 }
 
-.con {
-  padding: 20px;
+.btn-comment {
+  background-color: white;
+  color: #31287e;
+  border: 2px solid rgb(109, 90, 216);
+  border-radius: 20%;
 }
 
-.popup {
-  background-color: rgba(104, 107, 150, 0.774);
-  position: absolute;
-  top: 10%;
-  left: 20%;
-  width: 60vw;
-  z-index: 100;
-  border-radius: 40px;
+.btn-comment:hover {
+  background-color: #282e7e;
+  color: white;
+  border: none;
 }

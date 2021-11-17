@@ -1,0 +1,108 @@
+.con {
+  padding: 20px;
+}
+
+.popup {
+  background-color: rgba(104, 107, 150, 0.774);
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 60vw;
+  z-index: 100;
+  border-radius: 40px;
+}
+
+#back-menu {
+  float: right;
+  color: rgb(188, 214, 247);
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+#back-menu:hover {
+  transform: rotate(270deg);
+  color: grey;
+}
+
+.img-comment {
+  text-align: center;
+  margin: 30px;
+}
+
+.ingredient ul {
+  list-style-type: none;
+  display: flex;
+}
+
+.ingredient ul li {
+  color: rgb(185, 212, 247);
+  padding: 10px;
+}
+
+.instructions p {
+  line-height: 30px;
+  font-size: 20px;
+  text-align: center;
+  color: rgb(177, 186, 235);
+}
+
+.img-comment img {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+}
+
+.exit {
+  cursor: pointer;
+}
+
+.item-info {
+  padding: 10px;
+}
+
+.item-info a {
+  text-decoration: none;
+  color: #284d7e;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: sans-serif;
+}
+
+.item-info a:hover {
+  font-size: 23px;
+}
+
+h4 {
+  color: rgb(146, 172, 243);
+  text-align: center;
+}
+
+.comments {
+  text-align: center;
+  margin: 30px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 15vh;
+}
+
+.form-comment {
+  width: 50%;
+  margin: 0 auto;
+}
+
+h5 {
+  color: #28317e;
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+input {
+  outline: none;
+}
+
+.btn-submit {
+  background-color: white;
+  border: none;
+}
