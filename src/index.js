@@ -131,6 +131,7 @@ const loadPopupCommentPage = (itemId, popupNode) => {
 
 // Home Page
 const getFood = async () => {
+
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
   response.json().then((json) => {
     const itemArr = json.meals;
@@ -141,7 +142,7 @@ const getFood = async () => {
 <img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}">
 <div class="item-dishes">
 <p class="dishes-name">${item.strMeal}</p><div class="item-like">
-<a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div id="likes-span">likes</div>
+<a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div class="likes-span" id="likes-span">likes</div>
 </div>
 </div>
 <button class="btn btn-comment">Comment</button>
@@ -173,6 +174,53 @@ const getFood = async () => {
       });
     });
   });
+
+  const likeapi = async (itemid) => {
+    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/AZT0GFy9XFpC4qapJXTL/likes/', {
+      method: 'POST',
+      body: JSON.stringify({
+        item_id: itemid,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response);
+    window.location.reload();
+  };
+  
+  const Displaylikes = async () => {
+    const liked = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/AZT0GFy9XFpC4qapJXTL/likes')
+      .then((response) => response.json())
+      .then((data) => data);
+    const totalLikes = document.querySelectorAll('.likes-span');
+    liked.forEach((e, i) => {
+      if (liked != 0) {
+      totalLikes[i].textContent = `${e.likes} likes`;
+      } else {
+        totalLikes[i].textContent = '0 likes';
+      }
+    });
+  };
+  
+  Displaylikes();
+
+  const like = () => {
+    const likeBtn = document.getElementsByClassName('.heart');
+    const arrlikeBtn = Array.from(likeBtn);
+    arrlikeBtn.forEach((element, i) => {
+      element.addEventListener('click', () => {
+        preventDefault();
+        likeapi(i);
+      });
+    });
+  };
+  
+  setTimeout(() => like(), 500);
+
 };
 
 getFood();
+
+  
+
