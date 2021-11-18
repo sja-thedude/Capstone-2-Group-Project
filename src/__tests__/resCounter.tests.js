@@ -14,10 +14,10 @@ test('should have 3 comments', () => {
     username: 'Will',
     reservation: 'everyone',
   }];
-  expect(resCounter(Arr)).toBe('Comments (3) by previous visitors');
+  expect(resCounter(Arr)).toBe(3);
 });
 
 test('should have 0 comments', () => {
   const Arr = null;
-  expect(resCounter(Arr)).toBe('Comments (0) by previous visitors');
+  expect(resCounter(Arr)).toBe(0);
 });
