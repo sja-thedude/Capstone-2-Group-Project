@@ -150,10 +150,15 @@ const getFood = async () => {
 </div>`;
       container.appendChild(card);
     });
-    const totalItems = document.querySelector('.total-items');
-    const totalNum = document.createElement('p');
-    totalNum.textContent = `${itemArr.length} dishes`;
-    totalItems.appendChild(totalNum);
+
+    const itemsCounter = () => {
+      const totalItems = document.querySelector('.total-items');
+      const totalNum = document.createElement('p');
+      totalNum.textContent = `${itemArr.length} dishes`;
+      totalItems.appendChild(totalNum);
+    };
+
+    itemsCounter();
 
     const header = document.querySelector('header');
     const main = document.querySelector('.row');
