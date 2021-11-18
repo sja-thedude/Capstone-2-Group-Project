@@ -176,7 +176,7 @@ const getFood = async () => {
   });
 
   const likeapi = async (itemid) => {
-    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/AZT0GFy9XFpC4qapJXTL/likes/', {
+    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/u5hTYi8ovx2g46awgwdi/likes/', {
       method: 'POST',
       body: JSON.stringify({
         item_id: itemid,
@@ -190,7 +190,7 @@ const getFood = async () => {
   };
   
   const Displaylikes = async () => {
-    const liked = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/AZT0GFy9XFpC4qapJXTL/likes')
+    const liked = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/u5hTYi8ovx2g46awgwdi/likes')
       .then((response) => response.json())
       .then((data) => data);
     const totalLikes = document.querySelectorAll('.likes-span');
@@ -206,11 +206,11 @@ const getFood = async () => {
   Displaylikes();
 
   const like = () => {
-    const likeBtn = document.querySelectorAll('heart');
+    const likeBtn = document.querySelectorAll('.heart');
     const arrlikeBtn = Array.from(likeBtn);
-    arrlikeBtn.forEach((element, i) => {
+    arrlikeBtn.forEach((element) => {
       element.addEventListener('click', () => {
-        likeapi(i);
+        likeapi(element.id);
       });
     });
   };
