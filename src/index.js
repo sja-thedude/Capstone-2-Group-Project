@@ -194,9 +194,7 @@ const getFood = async () => {
     const title = document.querySelector('title');
     const reservationtBtn = document.querySelectorAll('.btn-reserve');
     let counter = 0;
-    console.log(reservationtBtn);
     reservationtBtn.forEach((item) => {
-      console.log(item.id);
       item.addEventListener('click', () => {
         const resList = getReservations(item.id);
         header.style.filter = 'blur(4px)';
@@ -205,7 +203,6 @@ const getFood = async () => {
         title.style.filter = 'blur(4px)';
 
         const index = list.findIndex((items) => items.idMeal === item.id);
-        console.log(index);
         const modal = document.createElement('div');
         modal.className = 'modal';
         const s = document.createElement('section');
@@ -234,7 +231,6 @@ const getFood = async () => {
         const ul = document.createElement('ul');
         let resCounter = 0;
         resList.then((data) => {
-          console.log(data);
           data.forEach((item) => {
             const li = document.createElement('li');
             li.innerText = `${item.date_start} - ${item.date_end} by ${item.username}`;
@@ -257,7 +253,6 @@ const getFood = async () => {
         Rbtn.innerText = 'Reserve';
         form.addEventListener('submit', (e) => {
           e.preventDefault();
-          console.log(name.value, Sdate.value, Edate.value);
           const updateRes = async () => {
             await fetch(`${resUrl}?item_id=${item.id}`, {
               method: 'POST',
