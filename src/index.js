@@ -131,7 +131,6 @@ const loadPopupCommentPage = (itemId, popupNode) => {
 
 // Home Page
 const getFood = async () => {
-
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
   response.json().then((json) => {
     const itemArr = json.meals;
@@ -193,21 +192,21 @@ const getFood = async () => {
       .then((response) => response);
     window.location.reload();
   };
-  
+
   const Displaylikes = async () => {
     const liked = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/u5hTYi8ovx2g46awgwdi/likes')
       .then((response) => response.json())
       .then((data) => data);
     const totalLikes = document.querySelectorAll('.likes-span');
     liked.forEach((e, i) => {
-      if (liked != 0) {
-      totalLikes[i].textContent = `${e.likes} likes`;
+      if (liked !== 0) {
+        totalLikes[i].textContent = `${e.likes} likes`;
       } else {
         totalLikes[i].textContent = '0 likes';
       }
     });
   };
-  
+
   Displaylikes();
 
   const like = () => {
@@ -219,12 +218,8 @@ const getFood = async () => {
       });
     });
   };
-  
-  setTimeout(() => like(), 500);
 
+  setTimeout(() => like(), 500);
 };
 
 getFood();
-
-  
-

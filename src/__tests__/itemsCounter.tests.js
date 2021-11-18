@@ -1,4 +1,3 @@
-const commentCounter = require('../__mocks__/commentCounter');
 const itemsCounter = require('../__mocks__/itemsCounter');
 
 test('should have 4 items', () => {
@@ -9,9 +8,9 @@ test('should have 4 items', () => {
   }, {
     item_id: '65494',
   }, {
-      item_id:'46881'
-  }
-    ];
+    item_id: '46881',
+  },
+  ];
   expect(itemsCounter(itemsArr)).toBe(4);
 });
 
