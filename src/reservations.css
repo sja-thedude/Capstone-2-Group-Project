@@ -1,0 +1,52 @@
+
+.modal {
+  position: fixed;
+  top: 20px;
+  right: 300px;
+  background-color: rgba(104, 107, 150, 0.849);
+  overflow-y: scroll;
+  height: 90vh;
+  width: 60%;
+  border-radius: 30px;
+  padding-top: 20px;
+  color: #28317e;
+}
+
+.modal-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-con ul li {
+  color: rgb(146, 172, 243);
+}
+
+.exit-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.x-con {
+  position: fixed;
+  top: 28px;
+  left: 26%;
+  width: 100%;
+  background-color: transparent;
+  border: transparent;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#form input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#form button {
+  margin-bottom: 20px;
+}

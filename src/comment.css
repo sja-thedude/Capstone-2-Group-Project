@@ -3,13 +3,16 @@
 }
 
 .popup {
+  display: none;
   background-color: rgba(104, 107, 150, 0.774);
-  position: absolute;
-  top: 10%;
+  position: fixed;
+  top: 7%;
   left: 20%;
   width: 60vw;
   z-index: 100;
   border-radius: 30px;
+  overflow-y: scroll;
+  height: 90vh;
 }
 
 #back-menu {

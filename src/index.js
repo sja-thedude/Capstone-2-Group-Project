@@ -1,5 +1,7 @@
+import icon from './close.png';
 import './style.css';
 import './comment.css';
+import './reservations.css';
 
 const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 const appId = 'AZT0GFy9XFpC4qapJXTL';
@@ -129,11 +131,23 @@ const loadPopupCommentPage = (itemId, popupNode) => {
     });
 };
 
+// Reservations
+const resUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/AZT0GFy9XFpC4qapJXTL/reservations/';
+
+let list;
+
+const getReservations = async (id) => {
+  const response = await fetch(`${resUrl}?item_id=${id}`);
+  const scores = response.json();
+  return scores;
+};
+
 // Home Page
 const getFood = async () => {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Chinese');
   response.json().then((json) => {
     const itemArr = json.meals;
+    list = itemArr;
     itemArr.forEach((item) => {
       const container = document.querySelector('#items');
       const card = document.createElement('div');
@@ -145,7 +159,7 @@ const getFood = async () => {
 </div>
 </div>
 <button class="btn btn-comment">Comment</button>
-<button class="btn btn-reserve">Reservations</button>
+<button class="btn btn-reserve" id="${item.idMeal}">Reservations</button>
 </div>`;
       container.appendChild(card);
     });
@@ -175,6 +189,117 @@ const getFood = async () => {
         const itemId = item.parentNode.parentNode.querySelector('img').id;
 
         loadPopupCommentPage(itemId, popupComment);
+      });
+    });
+    const title = document.querySelector('title');
+    const reservationtBtn = document.querySelectorAll('.btn-reserve');
+    let counter = 0;
+    console.log(reservationtBtn);
+    reservationtBtn.forEach((item) => {
+      console.log(item.id);
+      item.addEventListener('click', () => {
+        const resList = getReservations(item.id);
+        header.style.filter = 'blur(4px)';
+        main.style.filter = 'blur(4px)';
+        footer.style.filter = 'blur(4px)';
+        title.style.filter = 'blur(4px)';
+
+        const index = list.findIndex((items) => items.idMeal === item.id);
+        console.log(index);
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        const s = document.createElement('section');
+        s.className = 'modal-con';
+        const xBtn = document.createElement('button');
+        xBtn.className = 'x-con';
+        xBtn.addEventListener('click', () => {
+          xBtn.parentElement.parentElement.remove();
+          header.style.filter = 'blur(0px)';
+          main.style.filter = 'blur(0px)';
+          footer.style.filter = 'blur(0px)';
+          popupComment.style.display = 'none';
+        });
+        const xImg = document.createElement('img');
+        xImg.src = `${icon}`;
+        xImg.className = 'exit-icon';
+        const foodImg = document.createElement('img');
+        foodImg.src = `${list[index].strMealThumb}`;
+        foodImg.className = 'meal-img';
+        foodImg.id = `${list[index].idMeal}img`;
+        const h2 = document.createElement('h2');
+        h2.className = 'dishes-name';
+        h2.innerText = `${list[index].strMeal}`;
+        const h3 = document.createElement('h3');
+        h3.innerText = 'Reservations(0)';
+        const ul = document.createElement('ul');
+        let resCounter = 0;
+        resList.then((data) => {
+          console.log(data);
+          data.forEach((item) => {
+            const li = document.createElement('li');
+            li.innerText = `${item.date_start} - ${item.date_end} by ${item.username}`;
+            ul.appendChild(li);
+            resCounter++;
+          });
+          h3.innerText = `Reservations(${resCounter})`;
+        });
+        const h32 = document.createElement('h3');
+        h32.innerText = 'Add a reservation';
+        const form = document.createElement('form');
+        form.id = 'form';
+        const name = document.createElement('input');
+        name.placeholder = 'Your name';
+        const Sdate = document.createElement('input');
+        Sdate.placeholder = 'Start date';
+        const Edate = document.createElement('input');
+        Edate.placeholder = 'End date';
+        const Rbtn = document.createElement('button');
+        Rbtn.innerText = 'Reserve';
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          console.log(name.value, Sdate.value, Edate.value);
+          const updateRes = async () => {
+            await fetch(`${resUrl}?item_id=${item.id}`, {
+              method: 'POST',
+              body: JSON.stringify({
+                item_id: item.id,
+                username: name.value,
+                date_start: Sdate.value,
+                date_end: Edate.value,
+              }),
+              headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+              },
+            })
+              .then((response) => response.json())
+              .then((json) => console.log(json));
+          };
+          updateRes();
+
+          const li = document.createElement('li');
+          li.innerText = `${Sdate.value} - ${Edate.value} by ${name.value}`;
+          ul.appendChild(li);
+          counter++;
+          h3.innerText = `Reservations(${counter})`;
+          form.reset();
+        });
+
+        xBtn.appendChild(xImg);
+        form.appendChild(name);
+        form.appendChild(Sdate);
+        form.appendChild(Edate);
+        form.appendChild(Rbtn);
+
+        s.appendChild(xBtn);
+        s.appendChild(foodImg);
+        s.appendChild(h2);
+        s.appendChild(h3);
+        s.appendChild(ul);
+        s.appendChild(h32);
+        s.appendChild(form);
+        modal.appendChild(s);
+
+        document.body.appendChild(modal);
       });
     });
   });
