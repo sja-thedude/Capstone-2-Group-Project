@@ -1,4 +1,4 @@
-const resCounter = require('../__mocks__/resCounter.js');
+const resCounter = require('../__mocks__/resCounter');
 
 test('should have 3 comments', () => {
   const Arr = [{
