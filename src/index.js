@@ -141,7 +141,7 @@ const getFood = async () => {
 <img src=${item.strMealThumb} class="meal-img" alt="item image" id="${item.idMeal}">
 <div class="item-dishes">
 <p class="dishes-name">${item.strMeal}</p><div class="item-like">
-<a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div id="likes-span">likes</div>
+<a class="heart-btn"><img id="${item.idMeal}" class="heart fa-heart" src="https://www.pngmagic.com/product_images/red-heart-png.png"/></a><div class="likes-span" id="likes-span">likes</div>
 </div>
 </div>
 <button class="btn btn-comment">Comment</button>
@@ -149,10 +149,15 @@ const getFood = async () => {
 </div>`;
       container.appendChild(card);
     });
-    const totalItems = document.querySelector('.total-items');
-    const totalNum = document.createElement('p');
-    totalNum.textContent = `${itemArr.length} dishes`;
-    totalItems.appendChild(totalNum);
+
+    const itemsCounter = () => {
+      const totalItems = document.querySelector('.total-items');
+      const totalNum = document.createElement('p');
+      totalNum.textContent = `${itemArr.length} dishes`;
+      totalItems.appendChild(totalNum);
+    };
+
+    itemsCounter();
 
     const header = document.querySelector('header');
     const main = document.querySelector('.row');
@@ -173,6 +178,48 @@ const getFood = async () => {
       });
     });
   });
+
+  const likeapi = async (itemid) => {
+    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/u5hTYi8ovx2g46awgwdi/likes/', {
+      method: 'POST',
+      body: JSON.stringify({
+        item_id: itemid,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response);
+    window.location.reload();
+  };
+
+  const Displaylikes = async () => {
+    const liked = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/u5hTYi8ovx2g46awgwdi/likes')
+      .then((response) => response.json())
+      .then((data) => data);
+    const totalLikes = document.querySelectorAll('.likes-span');
+    liked.forEach((e, i) => {
+      if (liked !== 0) {
+        totalLikes[i].textContent = `${e.likes} likes`;
+      } else {
+        totalLikes[i].textContent = '0 likes';
+      }
+    });
+  };
+
+  Displaylikes();
+
+  const like = () => {
+    const likeBtn = document.querySelectorAll('.heart');
+    const arrlikeBtn = Array.from(likeBtn);
+    arrlikeBtn.forEach((element) => {
+      element.addEventListener('click', () => {
+        likeapi(element.id);
+      });
+    });
+  };
+
+  setTimeout(() => like(), 500);
 };
 
 getFood();
