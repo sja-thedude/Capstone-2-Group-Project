@@ -1,4 +1,4 @@
-*{
+* {
   font-family: fantasy, sans-serif;
 }
 
@@ -31,10 +31,6 @@ header {
   padding-left: 30px;
 }
 
-.total-items {
-  font-size: 20px;
-}
-
 #items {
   display: grid;
   grid-template-rows: auto;
@@ -42,7 +38,7 @@ header {
   column-gap: 50px;
   row-gap: 50px;
   justify-content: center;
-  margin-left:100px;
+  margin-left: 100px;
   margin-right: 100px;
 }
 
@@ -91,15 +87,14 @@ header {
 }
 
 .heart:hover {
-  filter: 
+  filter:
     invert(47%)
     sepia(91%)
-    saturate(1791%) 
+    saturate(1791%)
     hue-rotate(160deg)
     brightness(93%)
     contrast(101%);
 }
-
 
 .btn {
   width: 40%;
