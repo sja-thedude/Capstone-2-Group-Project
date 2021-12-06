@@ -19,6 +19,9 @@ Hamid Murambiwa
 ![screenshot2](./app_screenshot2.png)
 ![screenshot3](./app_screenshot3.png)
 
+## View Live
+[Live](https://sja-capstone-chezprogrammer.netlify.app/)
+
 ## Built With
 
 - Html/Css
